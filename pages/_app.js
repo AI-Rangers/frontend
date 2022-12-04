@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 function MyApp({ Component, pageProps }) {
   const [liffObject, setLiffObject] = useState(null);
   const [liffError, setLiffError] = useState(null);
-  // process.env.LIFF_ID
-  const LIFF_ID = process.env.NEXT_PUBLIC_LIFF_ID
+
+  const LIFF_ID = process.env.LIFF_ID
+  // const LIFF_ID = process.env.NEXT_PUBLIC_LIFF_ID
 
   // Execute liff.init() when the app is initialized
   useEffect(() => {
