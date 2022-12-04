@@ -48,6 +48,7 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+# 如果不是 root 可能沒有足夠權限訪問環境變數 env
 # USER nextjs
 
 EXPOSE 3000
