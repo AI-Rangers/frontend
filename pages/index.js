@@ -58,7 +58,12 @@ export default function Home(props) {
     }
   };
 
-  const handleClick = (e, path) => {
+  const handleStyle = (e, path) => {
+    if (path === "/style") {
+    }
+  };
+
+  const handleCamera = (e, path) => {
     if (path === "/camera") {
       // 開啟連結
       liff.openWindow({
@@ -82,78 +87,45 @@ export default function Home(props) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://liff.puff.tw/">食農教育</a>
+          <a href="/">食農教育</a>
         </h1>
-        <Link href="/" onClick={(e) => handleGetProfile(e, "/profile")}>
-          Profile
-        </Link>
-
-        <Link href="/" onClick={(e) => handleLineLogin(e, "/login")}>
-          LINE登入
-        </Link>
-
-        <Link href="/" onClick={(e) => handleClick(e, "/camera")}>
-          影像辨識
-        </Link>
 
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
+           透過體驗，培養相關知識。
         </p>
 
-        <ul>
-          <li>
-            <Link href="/">Home</Link>
-          </li>
-          <li>
-            <Link href="/next">next</Link>
-          </li>
-          <li>
-            <Link href="/line">line</Link>
-          </li>
-        </ul>
-
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+          <Link href="/" onClick={(e) => handleLineLogin(e, "/login")} className={styles.card}>
+            <h3>LINE登入 &rarr;</h3>
+            <p>立即註冊</p>
+          </Link>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+          <Link href="/" onClick={(e) => handleGetProfile(e, "/profile")} className={styles.card}>
+            <h3>用戶資訊 &rarr;</h3>
+            <p>顯示相關資訊</p>
+          </Link>
 
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+          <Link href="/" onClick={(e) => handleCamera(e, "/camera")} className={styles.card}>
+            <h3>影像辨識 &rarr;</h3>
+            <p>農作物的影像辨識</p>
+          </Link>
 
-          <a
-            href="https://vercel.com/new"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          <Link href="/" onClick={(e) => handleStyle(e, "/style")} className={styles.card}>
+            <h3>影像風格轉換 &rarr;</h3>
+            <p>農作物的影像風格轉換</p>
+          </Link>
+
         </div>
       </main>
 
       <footer className={styles.footer}>
         <a
-          href="https://vercel.com"
+          href="/"
           target="_blank"
           rel="noopener noreferrer"
         >
           Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+          <img src="/plant.png" alt="Logo" className={styles.logo} />
         </a>
       </footer>
     </div>
