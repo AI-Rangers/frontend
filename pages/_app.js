@@ -14,7 +14,15 @@ function MyApp({ Component, pageProps }) {
         .init({ liffId: process.env.LIFF_ID })
         .then(() => {
           console.log("liff.init() done");
+          console.log("LIFF_ID = ", process.env.LIFF_ID);
           setLiffObject(liff);
+
+
+          c = liff.getContext();
+          p = liff.getProfile();
+          console.log("c", c);
+          console.log("p", p);
+
         })
         .catch((error) => {
           console.log(`liff.init() failed: ${error}`);

@@ -1,9 +1,11 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import packageJson from "../package.json";
 import Link from 'next/link'
 
 export default function Home({ posts }) {
+  const data = `data = ${posts.message}`
+  console.log(data)
+  console.log(posts)
 
   return (
     <div className={styles.container}>
@@ -14,7 +16,7 @@ export default function Home({ posts }) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js</a> on Docker!
+          Welcome to <a href="https://liff.puff.tw/">食農教育</a>
         </h1>
 
         <p className={styles.description}>
