@@ -93,12 +93,20 @@ export default function Profile(props) {
       <div>LINE ID: {profile.userId}</div>
       <div>名字: {profile.displayName}</div>
       <div>
-        {profile.pictureUrl && <Image
-          src={`${profile.pictureUrl}.jpg`}
-          alt={profile.displayName}
-          width={500}
-          height={500}
-        />}
+        {profile.pictureUrl &&
+          <img
+            src={`${profile.pictureUrl}.jpg`}
+            alt={profile.displayName}
+            width={500}
+            height={500}
+          />
+          // <Image
+          //   src={`${profile.pictureUrl}.jpg`}
+          //   alt={profile.displayName}
+          //   width={500}
+          //   height={500}
+          // />
+        }
       </div>
     </section>
   )
