@@ -51,10 +51,10 @@ export default function Profile(props) {
           // 後台的 Email address permission 要是「Applied」
           // LIFF 的設定，Scopes 的「email*」要打勾
           // 使用者在登入時，「電子郵件帳號」也要是「許可」的
-          let user = liff.getDecodedIDToken();
-          let email = user.email;
-          console.log("取得使用者 email");
-          console.log(email);
+          // let user = liff.getDecodedIDToken();
+          // let email = user.email;
+          // console.log("取得使用者 email");
+          // console.log(email);
         }
       });
 
@@ -64,25 +64,6 @@ export default function Profile(props) {
       alert(err.message)
     }
   };
-
-  async function sendMessage () {
-    try {
-      await liff.ready // 確保 init 必須執行完畢
-      // 從這裡開始使用 liff 的 API
-      if (!liff.isInClient()) throw new Error('liff.isInClient() = false')
-      const contextType = (liff.getContext() || {}).type
-      const notInChat = ~['utou', 'room', 'group'].indexOf(contextType)
-      if (notInChat) throw new Error(`liff.getContext().type = ${contextType}`)
-      await liff.sendMessages([{
-        type: 'text',
-        text: 'Hello world'
-      }])
-    } catch (err) {
-      // 發生錯誤
-      console.log(err.code, err.message)
-      alert(err.message)
-    }
-  }
   
   return (
     <section style={{ textAlign: 'center' }}>

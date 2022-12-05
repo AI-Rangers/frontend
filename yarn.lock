@@ -517,7 +517,7 @@
     file-type "^16.5.4"
     form-data "^4.0.0"
 
-"@line/liff@^2.16.0":
+"@line/liff@^2.21.3":
   version "2.21.3"
   resolved "https://registry.yarnpkg.com/@line/liff/-/liff-2.21.3.tgz#9733c62a7e48faa2b751ac135a73f2a4ffce3ec6"
   integrity sha512-OGUPooaZlfKmResRZCJzxp5v8WLYZHnRSwwRc7NO3xm8tm0dG965L6siBUSxm2aH0FdqKw+dyWQvGoHyF4EjIQ==

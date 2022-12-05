@@ -15,13 +15,14 @@ export default function Home(props) {
   useEffect(() => {
     console.log("props", props);
     console.log("islogin", islogin);
-    setIslogin(login_status())
+    
   }, []);
 
   const login_status = async () => {
     try {
       liff?.ready && await liff.ready.then( async () => {
         let isLoggedIn = await liff.isLoggedIn();
+        setIslogin(isLoggedIn)
         return isLoggedIn;
         // if (liff.isLoggedIn()) {
         // }
