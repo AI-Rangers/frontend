@@ -30,14 +30,27 @@ export default function Camera() {
     event.preventDefault();
     const body = new FormData();
     // const url = `https://api.puff.tw/predict/image`
-    const url = `https://api.puff.tw/uploadfile`
+    const url = `https://api.puff.tw/uploadfile/`;
     body.append("file", image);
     const response = await fetch(url, {
       method: "POST",
       body: body
     });
 
-    console.log('response', response)
+    console.log('response', response);
+  };
+
+  const uploadToServer2 = async (event) => {
+    event.preventDefault();
+    const body = new FormData();
+    const url = `https://api.puff.tw/predict/image/`
+    body.append("file", image);
+    const response = await fetch(url, {
+      method: "POST",
+      body: body
+    });
+
+    console.log('response', response);
   };
 
 
@@ -55,6 +68,15 @@ export default function Camera() {
         >
           Send to server
         </button>
+
+        <button
+          className="btn btn-primary"
+          type="submit"
+          onClick={uploadToServer2}
+        >
+          Send to server2
+        </button>
+
       </div>
     </div>
   );
