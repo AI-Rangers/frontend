@@ -69,6 +69,7 @@ export default function Home(props) {
 
   const handleLineLogin = (e, path) => {
     if (path === "/login") {
+      console.log("isLoggedIn", liff.isLoggedIn());
       // liff.isInClient()
       if (!liff.isLoggedIn()) {
         // 開啟連結
@@ -76,6 +77,8 @@ export default function Home(props) {
           // 使用者登入後要去到哪個頁面
           redirectUri: 'https://liff.puff.tw/callback'
         });
+
+        setIslogin(login_status())
       }
     }
   };
