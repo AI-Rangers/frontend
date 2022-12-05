@@ -3,42 +3,57 @@ import Head from 'next/head'
 import Image from 'next/image'
 
 export default function Camera() {
-  const [img, setImg] = useState({
-    style : "",
-    origin_name : "",
-    origin_url : "",
-    styled_name : "",
-    styled_url : ""
-  })
+  // const [img, setImg] = useState({
+  //   style : "",
+  //   origin_name : "",
+  //   origin_url : "",
+  //   styled_name : "",
+  //   styled_url : ""
+  // })
 
   // useEffect(async () => {
   // }, [])
 
+  const [image, setImage] = useState(null);
+  const [createObjectURL, setCreateObjectURL] = useState(null);
+  
+  const uploadToClient = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      const i = event.target.files[0];
+  
+      setImage(i);
+      setCreateObjectURL(URL.createObjectURL(i));
+    }
+  };
+  
+  const uploadToServer = async (event) => {
+    const body = new FormData();
+    const url = `https://api.puff.tw/predict/image`
+    body.append("file", image);
+    const response = await fetch(url, {
+      method: "POST",
+      body
+    });
+    console.log('response', response)
+  };
+  
   return (
-    <section style={{ textAlign: 'center' }}>
-      <Head>
-        <title>My Profile</title>
-      </Head>
-      <h1>原圖</h1>
-      <div>Name: {img.origin_name}</div>
+    <div>
       <div>
-        {img.origin_url && <Image
-          src={img.origin_url}
-          alt={img.origin_name}
-          width={500}
-          height={500}
-        />}
+        <img src={createObjectURL} />
+        <h4>Select Image</h4>
+        <input type="file" name="myImage" onChange={uploadToClient} />
+        <button
+          className="btn btn-primary"
+          type="submit"
+          onClick={uploadToServer}
+        >
+          Send to server
+        </button>
       </div>
-      <h1>風格轉化圖</h1>
-      <div>Name: {img.styled_name}</div>
-      <div>
-        {img.styled_url && <Image
-          src={img.styled_url}
-          alt={img.styled_name}
-          width={500}
-          height={500}
-        />}
-      </div>
-    </section>
-  )
+    </div>
+  );
+  
 }
+
+
