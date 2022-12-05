@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 
 export default function Profile(props) {
-  const [profile, setProfile] = useState({displayName:"", pictureUrl:""})
+  const [profile, setProfile] = useState({userId:"", displayName:"", pictureUrl:""})
   const { liff, liffError } = props;
 
   useEffect(() => {
@@ -25,7 +25,6 @@ export default function Profile(props) {
       // .catch((err) => {
       //   console.log(err);
       // })
-    
 
       liff?.ready && await liff.ready.then( async () => {
         const profile = await liff.getProfile()
@@ -91,14 +90,15 @@ export default function Profile(props) {
         <title>My Profile</title>
       </Head>
       <h1>Profile</h1>
+      <div>LINE ID: {profile.userId}</div>
+      <div>名字: {profile.displayName}</div>
       <div>
         {profile.pictureUrl && <Image
-          src={profile.pictureUrl}
+          src={`${profile.pictureUrl}.jpg`}
           alt={profile.displayName}
           width={500}
           height={500}
         />}
-        <div>Name: {profile.displayName}</div>
       </div>
     </section>
   )
