@@ -85,11 +85,11 @@ export default function Profile(props) {
   }
   
   return (
-    <section>
+    <section style={{ textAlign: 'center' }}>
       <Head>
-        <title>My Profile</title>
+        <title>會員資訊</title>
       </Head>
-      <h1>Profile</h1>
+      <h1>會員資訊</h1>
       <div>LINE ID: {profile.userId}</div>
       <div>名字: {profile.displayName}</div>
       <div>

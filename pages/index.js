@@ -10,10 +10,28 @@ export default function Home(props) {
   // console.log(data)
   // console.log(posts)
   let { liff, liffError } = props;
+  const [islogin, setIslogin] = useState(false);
 
   useEffect(() => {
     console.log("props", props);
+    console.log("islogin", islogin);
+    setIslogin(login_status())
   }, []);
+
+  const login_status = async () => {
+    try {
+      liff?.ready && await liff.ready.then( async () => {
+        let isLoggedIn = await liff.isLoggedIn();
+        return isLoggedIn;
+        // if (liff.isLoggedIn()) {
+        // }
+      })
+    } catch (err) {
+      // 發生錯誤
+      console.log(err.code, err.message)
+      alert(err.message)
+    }
+  };
 
   const handleGetProfile = (e, path) => {
     if (path === "/profile") {
@@ -62,6 +80,14 @@ export default function Home(props) {
     }
   };
 
+  const handleLineLogout = (e, path) => {
+    if (path === "/logout") {
+      if (liff.isLoggedIn()) {
+        liff.logout();
+      }
+    }
+  };
+
   const handleStyle = (e, path) => {
     if (path === "/style") {
     }
@@ -106,10 +132,19 @@ export default function Home(props) {
         /> */}
 
         <div className={styles.grid}>
-          <Link href="/" onClick={(e) => handleLineLogin(e, "/login")} className={styles.card}>
-            <h3>LINE登入 &rarr;</h3>
+          {islogin ? (
+              <Link href="/" onClick={(e) => handleLineLogin(e, "/login")} className={styles.card}>
+              <h3>LINE登入 &rarr;</h3>
+              <p>立即註冊</p>
+              </Link>
+          ) : (
+            <Link href="/" onClick={(e) => handleLineLogout(e, "/logout")} className={styles.card}>
+            <h3>LINE登出 &rarr;</h3>
             <p>立即註冊</p>
-          </Link>
+            </Link>
+          )}
+      
+
 
           {/* onClick={(e) => handleGetProfile(e, "/profile")} */}
           <Link href="/profile"  className={styles.card}>
