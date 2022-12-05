@@ -37,7 +37,15 @@ function MyApp({ Component, pageProps }) {
   pageProps.liff = liffObject;
   pageProps.liffError = liffError;
 
-  return <Component {...pageProps} />
+  return (
+    <>
+      {/* <Script
+        src="https://example.com/script.js"
+        strategy="beforeInteractive"
+      /> */}
+      <Component {...pageProps}/>
+    </>
+  )
 }
 
 export default MyApp

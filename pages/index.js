@@ -180,7 +180,28 @@ export default function Home(props) {
     }
   };
 
+
+  function createMarkup() {
+    return {__html: `
+      <div class='tableauPlaceholder' id='viz1670281792143' style='position: relative'>
+        <noscript>
+          <a href='#'>
+          <img alt='儀表板窗格 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;cr&#47;crop_16701370109140&#47;1_1&#47;1_rss.png' style='border: none' /></a>
+        </noscript>
+        <object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+          <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='crop_16701370109140&#47;1_1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;cr&#47;crop_16701370109140&#47;1_1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='zh-TW' />
+        </object>
+      </div>
+    `};
+  }
+  
+  function TableauPlaceholder() {
+    return <div style={{ width: '100%' }}  dangerouslySetInnerHTML={createMarkup()} />;
+  }
+  
+
   return (
+    <>
     <div className={styles.container}>
       <Head>
         <title>Home</title>
@@ -239,11 +260,14 @@ export default function Home(props) {
           <h3>Tableau 報表</h3>
           <p>相關數據分析</p>
 
-          <tableau-viz id="tableauViz"
-            // src='https://public.tableau.com/views/Superstore_24/Overview'
-            src='https://public.tableau.com/views/crop_16701370109140/Overview'
+          {/* <tableau-viz id="tableauViz"
+            src='https://public.tableau.com/views/Superstore_24/Overview'
+            // src='https://public.tableau.com/views/crop_16701370109140/Overview'
             device="desktop" toolbar="bottom" hide-tabs width="800" height="600">
-          </tableau-viz>
+          </tableau-viz> */}
+
+          <TableauPlaceholder />
+
         </div>
       </main>
 
@@ -258,7 +282,8 @@ export default function Home(props) {
         </a>
       </footer>
     </div>
-  )
+  <script src="public/script.js" strategy="afterInteractive" />
+  </>)
 }
 
 // This function gets called at build time
