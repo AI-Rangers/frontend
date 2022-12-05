@@ -3,14 +3,6 @@ import Head from 'next/head'
 import Image from 'next/image'
 
 export default function Camera() {
-  // const [img, setImg] = useState({
-  //   style : "",
-  //   origin_name : "",
-  //   origin_url : "",
-  //   styled_name : "",
-  //   styled_url : ""
-  // })
-
   // useEffect(async () => {
   // }, [])
 
@@ -21,6 +13,8 @@ export default function Camera() {
     folder: "",
     path: ""
   });
+
+  const hasStyledImage = styledImage.path.length  > 0;
 
   useEffect(() => {
     // console.log('image', image)
@@ -35,15 +29,6 @@ export default function Camera() {
       // path:"static/styled/processedImg_香蕉.jpg"
     });
   }, [image]);
-
-  // (async ()=> {
-  //   // 取得遠端資源
-  //   const res = await fetch('https://jsonplaceholder.typicode.com/todos/1');
-  //   // 使用 response.json() 將資源轉為 JSON 格式
-  //   const json = await res.json();
-  //   console.log(json);
-  // })();
-
   
   const uploadToClient = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -64,14 +49,13 @@ export default function Camera() {
     });
     const json = await response.json();
     return json;
+    // file: "香蕉.jpg"
+    // folder :"static/origin/"
+    // path: "static/origin/香蕉.jpg"
   };
 
-// file: "香蕉.jpg"
-// folder :"static/origin/"
-// path: "static/origin/香蕉.jpg"
-
   const styleImg = async (img_name) => {
-    console.log("img_name", img_name);
+    // console.log("img_name", img_name);
     const selected_style = "pink_style_1800.t7";
     const params = {
       img_name: img_name,
@@ -86,35 +70,6 @@ export default function Camera() {
     return json;
   };
 
-  const uploadToServer1 = async (event) => {
-    event.preventDefault();
-    const body = new FormData();
-    // const url = `https://api.puff.tw/predict/image`
-    const url = `https://api.puff.tw/uploadfile/`;
-    body.append("uploaded_file", image);
-    const response = await fetch(url, {
-      method: "POST",
-      body: body
-    });
-
-    console.log('response', response);
-  };
-
-  const uploadToServer2 = async (event) => {
-    event.preventDefault();
-    const body = new FormData();
-    const url = `https://api.puff.tw/predict/image/`
-    body.append("file", image);
-    const response = await fetch(url, {
-      method: "POST",
-      body: body
-    });
-
-    console.log('response', response);
-  };
-
-
-  
   return (
     <section style={{ textAlign: 'center' }}>
       <div >
@@ -122,22 +77,6 @@ export default function Camera() {
           <img src={createObjectURL} />
           <h4>請選擇圖片</h4>
           <input type="file" name="myImage" onChange={uploadToClient} />
-          {/* <button
-            className="btn btn-primary"
-            type="submit"
-            onClick={uploadToServer1}
-          >
-            Send to server1
-          </button>
-
-          <button
-            className="btn btn-primary"
-            type="submit"
-            onClick={uploadToServer2}
-          >
-            Send to server2
-          </button> */}
-
         </div>
         
         <div>
@@ -145,12 +84,10 @@ export default function Camera() {
           {/* {styledImage.file} */}
         </div>
         <div>
-          <img src={`https://api.puff.tw/${styledImage.path}`} />
+          {hasStyledImage && <img src={`https://api.puff.tw/${styledImage.path}`} /> }
         </div>
       </div>
     </section>
   );
   
 }
-
-
