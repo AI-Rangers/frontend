@@ -50,6 +50,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 WORKDIR /app
 RUN echo "LIFF_ID=1657706181-1gYzEj7b" > ".env.production"
+ENV LIFF_ID 1657706181-1gYzEj7b
 
 # 如果不是 root 可能沒有足夠權限訪問環境變數 env
 USER nextjs
