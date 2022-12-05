@@ -81,8 +81,9 @@ export default function Home(props) {
           // 使用者登入後要去到哪個頁面
           redirectUri: 'https://liff.puff.tw/callback'
         });
+        login_status();
+        // setIslogin()
       }
-      setIslogin(login_status())
     }
   };
 
@@ -175,7 +176,7 @@ export default function Home(props) {
           <p>相關數據分析</p>
           <tableau-viz id="tableauViz"
             src='https://public.tableau.com/views/Superstore_24/Overview'
-            device="phone" toolbar="bottom" hide-tabs>
+            device="default" toolbar="bottom" hide-tabs width="100%" height="600">
           </tableau-viz>
         </div>
 
