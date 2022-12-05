@@ -29,7 +29,8 @@ export default function Camera() {
   const uploadToServer = async (event) => {
     event.preventDefault();
     const body = new FormData();
-    const url = `https://api.puff.tw/predict/image`
+    // const url = `https://api.puff.tw/predict/image`
+    const url = `https://api.puff.tw/uploadfile`
     body.append("file", image);
     const response = await fetch(url, {
       method: "POST",
