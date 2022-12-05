@@ -3,19 +3,20 @@ import Head from 'next/head'
 import Image from 'next/image'
 
 
-export default function Profile() {
+export default function Profile(props) {
   const [profile, setProfile] = useState({})
+  const { liff, liffError } = props;
 
   useEffect(async () => {
-    const liff = (await import('@line/liff')).default
-    await liff.ready
+    // const liff = (await import('@line/liff')).default
+    // await liff.ready
     console.log('isLoggedIn', liff.isLoggedIn());
     if (liff.isLoggedIn()) {
-        const profile = await liff.getProfile()
-        console.log('profile', profile);
+      // const profile = await liff.getProfile()
+      const profile = liff.getProfile()
+      console.log('profile', profile);
         setProfile(profile)
     }
-
   }, [profile.userId])
 
   return (
