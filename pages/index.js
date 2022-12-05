@@ -1,8 +1,8 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import Link from 'next/link'
-import { useState, useEffect } from "react";
-import Image from 'next/image'
+import Head from 'next/head';
+import styles from '../styles/Home.module.css';
+import Link from 'next/link';
+import { useState, useEffect, useRef } from "react";
+import Image from 'next/image';
 
 // export default function Home({ posts }) {
 export default function Home(props) {
@@ -12,20 +12,23 @@ export default function Home(props) {
   let { liff, liffError } = props;
   const [islogin, setIslogin] = useState(false);
 
+  // const isMobile = typeof window !== "undefined" && window.innerWidth <= 766
+
   useEffect(() => {
     console.log("props", props);
     console.log("islogin", islogin);
-    
-  }, []);
+    login_status();
+  }, [islogin]);
 
   const login_status = async () => {
     try {
       liff?.ready && await liff.ready.then( async () => {
         let isLoggedIn = await liff.isLoggedIn();
-        setIslogin(isLoggedIn)
+        const isEqual = isLoggedIn && islogin;
+        if (!isEqual) {
+          setIslogin(isLoggedIn);
+        }
         return isLoggedIn;
-        // if (liff.isLoggedIn()) {
-        // }
       })
     } catch (err) {
       // 發生錯誤
@@ -147,25 +150,35 @@ export default function Home(props) {
             </Link>
           )}
       
-
-
           {/* onClick={(e) => handleGetProfile(e, "/profile")} */}
           <Link href="/profile"  className={styles.card}>
             <h3>用戶資訊 &rarr;</h3>
             <p>顯示相關資訊</p>
           </Link>
 
-          <Link href="/" onClick={(e) => handleCamera(e, "/camera")} className={styles.card}>
+          {/* <Link href="/" onClick={(e) => handleCamera(e, "/camera")} className={styles.card}> */}
+          <Link href="/camera" className={styles.card}>
             <h3>影像辨識 &rarr;</h3>
             <p>農作物的影像辨識</p>
           </Link>
 
-          <Link href="/" onClick={(e) => handleStyle(e, "/style")} className={styles.card}>
+          {/* <Link href="/style" onClick={(e) => handleStyle(e, "/style")} className={styles.card}> */}
+          <Link href="/style" className={styles.card}>
             <h3>影像風格轉換 &rarr;</h3>
             <p>農作物的影像風格轉換</p>
           </Link>
 
         </div>
+
+        <div className={styles.main}>
+          <h3>Tableau 報表</h3>
+          <p>相關數據分析</p>
+          <tableau-viz id="tableauViz"
+            src='https://public.tableau.com/views/Superstore_24/Overview'
+            device="phone" toolbar="bottom" hide-tabs>
+          </tableau-viz>
+        </div>
+
       </main>
 
       <footer className={styles.footer}>
