@@ -18,7 +18,8 @@ function MyApp({ Component, pageProps }) {
         .init({ liffId: LIFF_ID })
         .then(() => {
           console.log("liff.init() done");
-          console.log("LIFF_ID = ", LIFF_ID);
+          console.log("LIFF_ID1 = ", LIFF_ID);
+          console.log("LIFF_ID2 = ", process.env.NEXT_PUBLIC_LIFF_ID);
           setLiffObject(liff);
         })
         .catch((error) => {
