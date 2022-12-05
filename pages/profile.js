@@ -8,30 +8,41 @@ export default function Profile(props) {
   const { liff, liffError } = props;
 
   useEffect(() => {
+    handleProfile()
     // const liff = (import('@line/liff')).default
+  }, [])
+
+  const handleProfile = async () => {
     try {
-      liff?.ready && liff.ready.then(() => {
+      // liff.init({ liffId: 'xxxxxxxx-xxxxxxx' })
+      // .then(async () => {
+      //   if (liff.isLoggedIn()) {
+      //     console.log(liff.getProfile());
+      //   } else {
+      //     liff.login();
+      //   }
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      // })
+    
+
+      liff?.ready && await liff.ready.then( async () => {
+        const profile = await liff.getProfile()
         console.log('liff', liff);
         console.log('isLoggedIn', liff.isLoggedIn());
         if (liff.isLoggedIn()) {
-          // const profile = await liff.getProfile()
-          const profile = liff.getProfile()
           console.log('profile', profile);
-            setProfile(profile)
+          setProfile(profile)
         }
       });
+
     } catch (err) {
       // 發生錯誤
       console.log(err.code, err.message)
       alert(err.message)
     }
-  
-  }, [liff])
-
-  // const handleStyle = async (e, path) => {
-  //   if (path === "/style") {
-  //   }
-  // };
+  };
 
   async function sendMessage () {
     try {
