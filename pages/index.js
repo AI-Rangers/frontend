@@ -16,7 +16,7 @@ export default function Home(props) {
     console.log("props", props);
     console.log("islogin", islogin);
     setIslogin(login_status())
-  }, [islogin]);
+  }, []);
 
   const login_status = async () => {
     try {
