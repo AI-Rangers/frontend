@@ -282,7 +282,7 @@ export default function Home(props) {
         </a>
       </footer>
     </div>
-  <script src="public/script.js" strategy="afterInteractive" />
+  <script src="/script.js" strategy="afterInteractive" />
   </>)
 }
 
