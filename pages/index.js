@@ -17,14 +17,23 @@ export default function Home(props) {
   useEffect(() => {
     console.log("props", props);
     console.log("islogin", islogin);
-    login_status();
+    // login_status();
+
+    // const hasLogin = liff?.isLoggedIn();
+    // hasLogin && uploadToServer().then( async ( response ) => {
+    //   // console.log("response ", response);
+    //   const result = await styleImg(response.file);
+    //   // console.log('result', result);
+    //   setStyledImage(result);
+    // });
   }, [islogin]);
 
   const login_status = async () => {
     try {
       liff?.ready && await liff.ready.then( async () => {
-        let isLoggedIn = await liff.isLoggedIn();
-        const isEqual = isLoggedIn && islogin;
+        const isLoggedIn = await liff.isLoggedIn();
+        const isEqual = isLoggedIn === islogin;
+
         if (!isEqual) {
           setIslogin(isLoggedIn);
         }
@@ -36,6 +45,56 @@ export default function Home(props) {
       alert(err.message)
     }
   };
+
+  const lineLogin = async () => {
+    try {
+      liff?.ready && await liff.ready.then( async () => {
+        let isLoggedIn = await liff.isLoggedIn();
+        const notEqual = isLoggedIn !== true;
+        // liff.isInClient()
+        if (notEqual) {
+          // 開啟連結
+          await liff.login({
+            // 使用者登入後要去到哪個頁面
+            redirectUri: 'https://liff.puff.tw/callback'
+          }).then( async (res) => {
+              isLoggedIn = await liff.isLoggedIn();
+              console.log("取得登入資料", res);
+              setIslogin(isLoggedIn);
+          });
+        }
+        return isLoggedIn;
+      })
+    } catch (err) {
+      // 發生錯誤
+      console.log(err.code, err.message)
+      alert(err.message)
+    }
+  };
+
+  const lineLogout = async () => {
+    try {
+      liff?.ready && await liff.ready.then( async () => {
+        let isLoggedIn = await liff.isLoggedIn();
+        const notEqual = isLoggedIn !== false;
+        // liff.isInClient()
+        if (notEqual) {
+          // 開啟連結
+          await liff.logout().then( async (res) => {
+              isLoggedIn = await liff.isLoggedIn();
+              console.log("取得登出資料", res);
+              setIslogin(isLoggedIn);
+          });
+        }
+        return isLoggedIn;
+      })
+    } catch (err) {
+      // 發生錯誤
+      console.log(err.code, err.message)
+      alert(err.message)
+    }
+  };
+
 
   const handleGetProfile = (e, path) => {
     if (path === "/profile") {
@@ -73,25 +132,27 @@ export default function Home(props) {
 
   const handleLineLogin = (e, path) => {
     if (path === "/login") {
-      console.log("isLoggedIn", liff.isLoggedIn());
-      // liff.isInClient()
-      if (!liff.isLoggedIn()) {
-        // 開啟連結
-        liff.login({
-          // 使用者登入後要去到哪個頁面
-          redirectUri: 'https://liff.puff.tw/callback'
-        });
-        login_status();
-        // setIslogin()
-      }
+      lineLogin();
+      // console.log("isLoggedIn", liff.isLoggedIn());
+      // // liff.isInClient()
+      // if (!liff.isLoggedIn()) {
+      //   // 開啟連結
+      //   liff.login({
+      //     // 使用者登入後要去到哪個頁面
+      //     redirectUri: 'https://liff.puff.tw/callback'
+      //   });
+      //   login_status();
+      //   // setIslogin()
+      // }
     }
   };
 
   const handleLineLogout = (e, path) => {
     if (path === "/logout") {
-      if (liff.isLoggedIn()) {
-        liff.logout();
-      }
+      lineLogout();
+      // if (liff.isLoggedIn()) {
+      //   liff.logout();
+      // }
     }
   };
 
@@ -170,16 +231,16 @@ export default function Home(props) {
           </Link>
 
         </div>
-
-        <div className={styles.main}>
+        <div className={styles.main} style={{ width: '100%' }} >
           <h3>Tableau 報表</h3>
           <p>相關數據分析</p>
+
           <tableau-viz id="tableauViz"
-            src='https://public.tableau.com/views/Superstore_24/Overview'
-            device="default" toolbar="bottom" hide-tabs width="100%" height="600">
+            // src='https://public.tableau.com/views/Superstore_24/Overview'
+            src='https://public.tableau.com/views/crop_16701370109140/Overview'
+            device="desktop" toolbar="bottom" hide-tabs width="800" height="600">
           </tableau-viz>
         </div>
-
       </main>
 
       <footer className={styles.footer}>
