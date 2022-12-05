@@ -17,7 +17,7 @@ export default function Home(props) {
   useEffect(() => {
     console.log("props", props);
     console.log("islogin", islogin);
-    // login_status();
+    login_status();
 
     // const hasLogin = liff?.isLoggedIn();
     // hasLogin && uploadToServer().then( async ( response ) => {
@@ -30,12 +30,13 @@ export default function Home(props) {
 
   const login_status = async () => {
     try {
+      console.log('login_status');
       liff?.ready && await liff.ready.then( async () => {
         const isLoggedIn = await liff.isLoggedIn();
-        const isEqual = isLoggedIn === islogin;
-
-        if (!isEqual) {
+        const notEqual = isLoggedIn !== islogin;
+        if (notEqual) {
           setIslogin(isLoggedIn);
+          console.log('setIslogin', isLoggedIn);
         }
         return isLoggedIn;
       })
@@ -48,6 +49,7 @@ export default function Home(props) {
 
   const lineLogin = async () => {
     try {
+      console.log('lineLogin');
       liff?.ready && await liff.ready.then( async () => {
         let isLoggedIn = await liff.isLoggedIn();
         const notEqual = isLoggedIn !== true;
@@ -61,6 +63,7 @@ export default function Home(props) {
               isLoggedIn = await liff.isLoggedIn();
               console.log("取得登入資料", res);
               setIslogin(isLoggedIn);
+              console.log('setIslogin', isLoggedIn);
           });
         }
         return isLoggedIn;
@@ -74,6 +77,7 @@ export default function Home(props) {
 
   const lineLogout = async () => {
     try {
+      console.log('lineLogout');
       liff?.ready && await liff.ready.then( async () => {
         let isLoggedIn = await liff.isLoggedIn();
         const notEqual = isLoggedIn !== false;
@@ -84,6 +88,7 @@ export default function Home(props) {
               isLoggedIn = await liff.isLoggedIn();
               console.log("取得登出資料", res);
               setIslogin(isLoggedIn);
+              console.log('setIslogin', isLoggedIn);
           });
         }
         return isLoggedIn;
@@ -132,6 +137,7 @@ export default function Home(props) {
 
   const handleLineLogin = (e, path) => {
     if (path === "/login") {
+      console.log('handleLineLogin');
       lineLogin();
       // console.log("isLoggedIn", liff.isLoggedIn());
       // // liff.isInClient()
@@ -149,10 +155,8 @@ export default function Home(props) {
 
   const handleLineLogout = (e, path) => {
     if (path === "/logout") {
+      console.log('handleLineLogout');
       lineLogout();
-      // if (liff.isLoggedIn()) {
-      //   liff.logout();
-      // }
     }
   };
 
