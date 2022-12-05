@@ -16,7 +16,7 @@ export default function Home(props) {
     console.log("props", props);
     console.log("islogin", islogin);
     setIslogin(login_status())
-  }, []);
+  }, [islogin]);
 
   const login_status = async () => {
     try {
@@ -77,9 +77,8 @@ export default function Home(props) {
           // 使用者登入後要去到哪個頁面
           redirectUri: 'https://liff.puff.tw/callback'
         });
-
-        setIslogin(login_status())
       }
+      setIslogin(login_status())
     }
   };
 
