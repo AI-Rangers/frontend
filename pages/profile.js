@@ -34,6 +34,28 @@ export default function Profile(props) {
         if (liff.isLoggedIn()) {
           console.log('profile', profile);
           setProfile(profile)
+
+          // 取得使用者公開資料
+          // 後台的「Scopes」要設定開啟 profile, openid
+          liff.getProfile()
+              .then((profile) => {
+                console.log("取得使用者公開資料");
+                console.log(profile);
+          });
+
+          // 取得使用者類型資料
+          let context = liff.getContext();
+          console.log("取得使用者類型資料");
+          console.log(context);
+
+          // 取得使用者 email
+          // 後台的 Email address permission 要是「Applied」
+          // LIFF 的設定，Scopes 的「email*」要打勾
+          // 使用者在登入時，「電子郵件帳號」也要是「許可」的
+          let user = liff.getDecodedIDToken();
+          let email = user.email;
+          console.log("取得使用者 email");
+          console.log(email);
         }
       });
 
