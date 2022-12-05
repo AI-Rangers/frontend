@@ -6,7 +6,6 @@ function MyApp({ Component, pageProps }) {
   const [liffError, setLiffError] = useState(null);
 
   const LIFF_ID = process.env.LIFF_ID
-  // const LIFF_ID = process.env.NEXT_PUBLIC_LIFF_ID
 
   // Execute liff.init() when the app is initialized
   useEffect(() => {
@@ -19,7 +18,6 @@ function MyApp({ Component, pageProps }) {
         .then(() => {
           console.log("liff.init() done");
           console.log("LIFF_ID1 = ", LIFF_ID);
-          console.log("LIFF_ID2 = ", process.env.NEXT_PUBLIC_LIFF_ID);
           setLiffObject(liff);
         })
         .catch((error) => {

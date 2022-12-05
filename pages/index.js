@@ -2,6 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import { useState, useEffect } from "react";
+import Image from 'next/image'
 
 // export default function Home({ posts }) {
 export default function Home(props) {
@@ -18,13 +19,13 @@ export default function Home(props) {
     if (path === "/profile") {
       liff.getContext();
       // liff, liffError
-      c = liff.getContext();
-      p = liff.getProfile();
+      let c = liff.getContext();
+      let p = liff.getProfile();
       console.log("c", c);
       console.log("p", p);
     
         // 取得使用者類型資料
-      var context = liff.getContext();
+      let context = liff.getContext();
       console.log("取得使用者類型資料");
       console.log(context);
     
@@ -50,11 +51,14 @@ export default function Home(props) {
 
   const handleLineLogin = (e, path) => {
     if (path === "/login") {
-      // 開啟連結
-      liff.login({
-        // 使用者登入後要去到哪個頁面
-        redirectUri: 'https://liff.puff.tw/'
-      });
+      // liff.isInClient()
+      if (!liff.isLoggedIn()) {
+        // 開啟連結
+        liff.login({
+          // 使用者登入後要去到哪個頁面
+          redirectUri: 'https://liff.puff.tw/callback'
+        });
+      }
     }
   };
 
@@ -94,13 +98,21 @@ export default function Home(props) {
            透過體驗，培養相關知識。
         </p>
 
+        {/* <Image
+          src="/images/LINE_logo.webp"
+          width={200}
+          height={200}
+          alt="LINE Frontend Framework"
+        /> */}
+
         <div className={styles.grid}>
           <Link href="/" onClick={(e) => handleLineLogin(e, "/login")} className={styles.card}>
             <h3>LINE登入 &rarr;</h3>
             <p>立即註冊</p>
           </Link>
 
-          <Link href="/" onClick={(e) => handleGetProfile(e, "/profile")} className={styles.card}>
+          {/* onClick={(e) => handleGetProfile(e, "/profile")} */}
+          <Link href="/profile"  className={styles.card}>
             <h3>用戶資訊 &rarr;</h3>
             <p>顯示相關資訊</p>
           </Link>
