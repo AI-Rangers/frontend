@@ -55,17 +55,20 @@ export default function Home(props) {
       liff?.ready && await liff.ready.then( async () => {
         let isLoggedIn = await liff.isLoggedIn();
         const notEqual = isLoggedIn !== true;
+        console.log('isLoggedIn', isLoggedIn);
+        console.log('islogin', islogin);
+        console.log('notEqual', notEqual);
         // liff.isInClient()
         if (notEqual) {
           // 開啟連結
           await liff.login({
             // 使用者登入後要去到哪個頁面
             redirectUri: 'https://liff.puff.tw/callback'
-          }).then( async (res) => {
-              isLoggedIn = await liff.isLoggedIn();
-              console.log("取得登入資料", res);
-              setIslogin(isLoggedIn);
-              console.log('setIslogin', isLoggedIn);
+          // }).then( async (res) => {
+          //     isLoggedIn = await liff.isLoggedIn();
+          //     console.log("取得登入資料", res);
+          //     setIslogin(isLoggedIn);
+          //     console.log('setIslogin', isLoggedIn);
           });
         }
         return isLoggedIn;

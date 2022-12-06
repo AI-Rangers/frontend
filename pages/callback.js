@@ -16,12 +16,12 @@ export default function Callback(props) {
         console.log('checkLogin');
         liff?.ready && await liff.ready.then( async () => {
             let isLoggedIn = await liff.isLoggedIn();
-            const isEqual = isLoggedIn === true;
+            const isLogin = isLoggedIn === true;
             console.log('isLoggedIn', isLoggedIn);
             // liff.isInClient()
-            if (isEqual) {
-                console.log("登入後轉向到首頁");
-                Router.push("/");
+            if (isLogin) {
+                // console.log("登入後轉向到首頁");
+                // Router.push("/");
             }
         })
         } catch (err) {
@@ -31,5 +31,17 @@ export default function Callback(props) {
         }
     }
 
-    return (null);
+    return (
+        <div className={styles.container}>
+            <Head>
+                <title>Home</title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <main className={styles.main}>
+            <h1 className={styles.title}>
+                {isLogin && <a href="/">已登入請回首頁</a>}
+            </h1>
+            </main>
+        </div>
+    );
 }
