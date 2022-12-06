@@ -43,6 +43,7 @@ export default function Callback(props) {
             <main className={styles.main}>
             <h1 className={styles.title}>
                 {islogin && <a href="/">已登入請回首頁</a>}
+                <a href="/">已登入請回首頁</a>
             </h1>
             </main>
         </div>

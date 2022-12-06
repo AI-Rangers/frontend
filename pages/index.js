@@ -90,13 +90,15 @@ export default function Home(props) {
         // liff.isInClient()
         if (notEqual) {
           // 開啟連結
-          await liff.logout().then( async (res) => {
-              isLoggedIn = await liff.isLoggedIn();
-              console.log("取得登出資料", res);
-              setIslogin(isLoggedIn);
-              console.log('setIslogin', isLoggedIn);
-          });
+          liff.logout();
+          // .then( async (res) => {
+          //     isLoggedIn = await liff.isLoggedIn();
+          //     console.log("取得登出資料", res);
+          //     setIslogin(isLoggedIn);
+          //     console.log('setIslogin', isLoggedIn);
+          // });
         }
+        login_status();
         return isLoggedIn;
       })
     } catch (err) {
