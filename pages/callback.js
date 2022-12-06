@@ -6,20 +6,23 @@ import Router from "next/router";
 
 export default function Callback(props) {
     let { liff, liffError } = props;
+    const [islogin, setIslogin] = useState(false);
 
     useEffect(() => {
         checkLogin();
-    }, []);
+    }, [islogin]);
 
     const checkLogin = async () => {
     try {
         console.log('checkLogin');
         liff?.ready && await liff.ready.then( async () => {
             let isLoggedIn = await liff.isLoggedIn();
-            const isLogin = isLoggedIn === true;
+            const isEqual = isLoggedIn === true;
+            setIslogin(isLoggedIn)
+            console.log('isEqual', isEqual);
             console.log('isLoggedIn', isLoggedIn);
             // liff.isInClient()
-            if (isLogin) {
+            if (isEqual) {
                 // console.log("登入後轉向到首頁");
                 // Router.push("/");
             }
@@ -39,7 +42,7 @@ export default function Callback(props) {
             </Head>
             <main className={styles.main}>
             <h1 className={styles.title}>
-                {isLogin && <a href="/">已登入請回首頁</a>}
+                {islogin && <a href="/">已登入請回首頁</a>}
             </h1>
             </main>
         </div>
