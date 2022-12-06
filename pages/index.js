@@ -34,6 +34,8 @@ export default function Home(props) {
       liff?.ready && await liff.ready.then( async () => {
         const isLoggedIn = await liff.isLoggedIn();
         const notEqual = isLoggedIn !== islogin;
+        console.log('notEqual', notEqual);
+        console.log('isLoggedIn', isLoggedIn);
         if (notEqual) {
           setIslogin(isLoggedIn);
           console.log('setIslogin', isLoggedIn);
@@ -226,13 +228,13 @@ export default function Home(props) {
 
         <div className={styles.grid}>
           {islogin ? (
-              <Link href="/" onClick={(e) => handleLineLogin(e, "/login")} className={styles.card}>
-              <h3>LINE登入 &rarr;</h3>
-              <p>立即註冊</p>
-              </Link>
-          ) : (
             <Link href="/" onClick={(e) => handleLineLogout(e, "/logout")} className={styles.card}>
             <h3>LINE登出 &rarr;</h3>
+            <p>立即註冊</p>
+            </Link>
+          ) : (
+            <Link href="/" onClick={(e) => handleLineLogin(e, "/login")} className={styles.card}>
+            <h3>LINE登入 &rarr;</h3>
             <p>立即註冊</p>
             </Link>
           )}
