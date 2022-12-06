@@ -18,15 +18,5 @@ module.exports = {
     // LIFF_ID: process.env.LIFF_ID,
     LIFF_ID: "1657706181-1gYzEj7b",
     // NEXT_PUBLIC_LIFF_ID: process.env.NEXT_PUBLIC_LIFF_ID,
-  },
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**.puff.tw',
-        port: '',
-        pathname: '/static/**',
-      },
-    ],
-  },
+  }
 }

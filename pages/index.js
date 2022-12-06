@@ -71,6 +71,7 @@ export default function Home(props) {
           //     console.log('setIslogin', isLoggedIn);
           });
         }
+        login_status();
         return isLoggedIn;
       })
     } catch (err) {
