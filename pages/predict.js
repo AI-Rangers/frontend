@@ -51,7 +51,7 @@ export default function Predict() {
   
   const uploadToServer = async () => {
     const body = new FormData();
-    const url = `https://api.puff.tw/predict/image/`;
+    const url = `https://api.puff.tw/predict/image`;
     const field_name = "file";
     body.append(field_name, image);
     const response = await fetch(url, {
