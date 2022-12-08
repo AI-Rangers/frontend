@@ -18,7 +18,7 @@ export default function Predict() {
 
   const hasStyledImage = styledImage.path.length  > 0;
 
-
+  const hasPredict = predict?.length > 0
   
 // 'https://api.puff.tw/predict/image'
 // 'file=@0bf9a3ba-0b20-4c02-8416-71b521cbde45.jpg;type=image/jpeg'
@@ -94,8 +94,8 @@ export default function Predict() {
         </div>
         <div>
           <h2> 辨識結果為 : </h2>
-          <h2 style={{ color: 'red' }}> {predict[0].class} </h2>
-          <h2 style={{ color: 'red' }}> {predict[0].confidence} </h2>
+          <h2 style={{ color: 'red' }}> { hasPredict && predict[0].class } </h2>
+          <h2 style={{ color: 'red' }}> { hasPredict && predict[0].confidence } </h2>
         </div>
 
         <div>
