@@ -252,7 +252,7 @@ export default function Home(props) {
           </Link>
 
           {/* <Link href="/" onClick={(e) => handleCamera(e, "/camera")} className={styles.card}> */}
-          <Link href="/camera" className={styles.card}>
+          <Link href="/predict" className={styles.card}>
             <h3>影像辨識 &rarr;</h3>
             <p>農作物的影像辨識</p>
           </Link>
