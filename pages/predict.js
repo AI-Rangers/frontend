@@ -31,8 +31,12 @@ export default function Predict() {
     hasImage && uploadToServer().then( ( response ) => {
       // console.log("response ", response);
       // const result = await styleImg(response.class);
-      setPredict(response.class);
-
+      setPredict(response);
+      // setPredict(response[0].class);
+      // [
+      //   {'class': 'tea', 'confidence': '46.94 %'},
+      //   {'class': 'custardapple', 'confidence': '30.80 %'}
+      // ]
       // console.log('result', result);
       // setStyledImage(result);
       // file: "processedImg_香蕉.jpg"
@@ -85,18 +89,19 @@ export default function Predict() {
     <section style={{ textAlign: 'center' }}>
       <div >
         <div>
-          <img src={createObjectURL} />
-          <h4>請選擇圖片</h4>
-          <input type="file" name="myImage" onChange={uploadToClient} />
-        </div>
-        
-        <div>
           <h4>影像辨識</h4>
           {/* {styledImage.file} */}
         </div>
         <div>
           <h2> 辨識結果為 : </h2>
-          <h2 style={{ color: 'red' }}> {predict} </h2>
+          <h2 style={{ color: 'red' }}> {predict[0].class} </h2>
+          <h2 style={{ color: 'red' }}> {predict[0].confidence} </h2>
+        </div>
+
+        <div>
+          <img src={createObjectURL} />
+          <h4>請選擇圖片</h4>
+          <input type="file" name="myImage" onChange={uploadToClient} />
         </div>
       </div>
     </section>

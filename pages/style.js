@@ -56,12 +56,19 @@ export default function Camera() {
 
   const styleImg = async (img_name) => {
     // console.log("img_name", img_name);
-    const selected_style = "pink_style_1800.t7";
+
+    // const selected_style = "pink_style_1800.t7";
+    // const params = {
+    //   img_name: img_name,
+    //   selected_style: selected_style
+    // };
+    // const url = new URL(`https://api.puff.tw/img/${img_name}/style/${selected_style}`);
+
     const params = {
-      img_name: img_name,
-      selected_style: selected_style
+      img_name: img_name
     };
-    const url = new URL(`https://api.puff.tw/img/${img_name}/style/${selected_style}`);
+    const url = new URL(`https://api.puff.tw/circlegan/${img_name}`);
+
     url.search = new URLSearchParams(params).toString();
     const response = await fetch(url, {
       method: "GET"
