@@ -66,12 +66,12 @@ export default function Tableaupage() {
     {value: "木瓜", text: "木瓜"},
     {value: "百香果", text: "百香果"},
     {value: "梨", text: "梨"},
-    {value: "狼尾草", text: "狼尾草"},
+    // {value: "狼尾草", text: "狼尾草"},
     {value: "紅豆", text: "紅豆"},
     {value: "蓮霧", text: "蓮霧"},
     {value: "田菁", text: "田菁"},
     {value: "毛豆", text: "毛豆"},
-    {value: "太陽麻", text: "太陽麻"},
+    // {value: "太陽麻", text: "太陽麻"},
     {value: "甘藷", text: "甘藷"},
 
     {value: "芋", text: "芋"},
@@ -167,13 +167,16 @@ export default function Tableaupage() {
     //   {/* </div>
     // </Layout> */}
     // key={keyValue}
-    <section style={{ textAlign: 'center' }}>
+    <section style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
       {/* <div className="" style={{ height: '50px', fontSize: "20pt" }}>
         <span> 你還有 - </span>
         <span> 600 NT$ </span>
       </div> */}
-      <div className="" style={{ height: '50px', fontSize: "20pt" }}>
-        <span> 農產品 - </span>
+      <div className="" style={{
+        height: '200px', fontSize: "20pt",
+        display: "flex", flexDirection: "column",
+        justifyContent: "space-evenly", maxWidth: "300px" }}>
+        <span> 農產品 </span>
         <select onChange={handleChange} name="item" id="fruit-select"
           style={{ fontSize: "20pt" }}
         >
@@ -183,7 +186,7 @@ export default function Tableaupage() {
             </option>
           ))}
         </select>
-        &nbsp;&nbsp;&nbsp;&nbsp;
+        {/* &nbsp;&nbsp;&nbsp;&nbsp; */}
         <select onChange={handleChange2} name="qty" id="count-select"
           style={{ fontSize: "20pt" }} 
         >
@@ -225,7 +228,7 @@ export default function Tableaupage() {
           <option value="5">5</option>
         </select> */}
 
-        &nbsp;&nbsp;&nbsp;&nbsp;
+        {/* &nbsp;&nbsp;&nbsp;&nbsp; */}
         <button
           onClick={ handleSubmit }
           style={{ fontSize: "20pt" }}
