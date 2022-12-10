@@ -6,7 +6,8 @@ import Image from 'next/image'
 export default function Tableaupage() {
   const [keyValue, setKeyValue] = useState(0);
   const [value, setValue] = useState("b");
-  const [value2, setValue2] = useState(0);
+  const [qty, setQty] = useState(0);
+  const [item, setItem] = useState("");
   const [option, setOption] = useState({ width: 0, height: 0 });
   const options = [
     {
@@ -126,16 +127,37 @@ export default function Tableaupage() {
 
 
   const handleChange = event => {
+    // setOption(options[2].value);
+    // const [qty, setQty] = useState(0);
+    // const [item, setItem] = useState("");
     console.log(event.target.value);
+    setItem(event.target.value);
+  };
+  const handleChange2 = event => {
+    console.log(event.target.value);
+    setQty(event.target.value);
   };
 
-  alert("感謝您的訂單。");
+
   // console.log(option.width);
   // console.log(option.height);
 
-  function logValue() {
+  const handleSubmit = event => {
+
+    if (item === "") {
+      alert("請選擇產品");
+      return;
+    }
+    if (qty === 0) {
+      alert("請選擇數量");
+      return;
+    }
     alert("感謝您的訂單。");
-    // console.log(value);
+    // console.log(event.target.value);
+  };
+
+  function logValue() {
+    console.log(value);
   }
 
   return (
@@ -152,7 +174,7 @@ export default function Tableaupage() {
       </div> */}
       <div className="" style={{ height: '50px', fontSize: "20pt" }}>
         <span> 農產品 - </span>
-        <select onChange={handleChange} name="fruits" id="fruit-select"
+        <select onChange={handleChange} name="item" id="fruit-select"
           style={{ fontSize: "20pt" }}
         >
           {arr.map(option => (
@@ -162,7 +184,7 @@ export default function Tableaupage() {
           ))}
         </select>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <select onChange={handleChange} name="count" id="count-select"
+        <select onChange={handleChange2} name="qty" id="count-select"
           style={{ fontSize: "20pt" }} 
         >
           {arr2.map(option => (
@@ -205,7 +227,7 @@ export default function Tableaupage() {
 
         &nbsp;&nbsp;&nbsp;&nbsp;
         <button
-          onClick={logValue}
+          onClick={ handleSubmit }
           style={{ fontSize: "20pt" }}
         >下單</button>
 
