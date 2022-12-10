@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import { useState, useEffect } from "react";
+import 'bootstrap/dist/css/bootstrap.css';
 
 function MyApp({ Component, pageProps }) {
   const [liffObject, setLiffObject] = useState(null);
@@ -30,6 +31,8 @@ function MyApp({ Component, pageProps }) {
           setLiffError(error.toString());
         });
     });
+
+    import("bootstrap/dist/js/bootstrap");
   }, []);
 
   // Provide `liff` object and `liffError` object

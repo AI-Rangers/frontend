@@ -2,8 +2,48 @@
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
+import Modal, { ModalDialog} from '../components/modal'
+import useSWR from 'swr'
+import axios from "axios"
+import useSWRMutation from 'swr/mutation'
 
-export default function Tableaupage() {
+export default function Tableaupage(props) {
+    const [profile, setProfile] = useState({userId:"", displayName:"", pictureUrl:""})
+    const { liff, liffError } = props;
+  
+    useEffect(() => {
+      handleProfile()
+    }, [])
+  
+    const handleProfile = async () => {
+      try {
+        liff?.ready && await liff.ready.then( async () => {
+          const profile = await liff.getProfile()
+          console.log('liff', liff);
+          console.log('isLoggedIn', liff.isLoggedIn());
+          if (liff.isLoggedIn()) {
+              // console.log('profile', profile);
+              // setProfile(profile)
+              // 取得使用者公開資料
+              // 後台的「Scopes」要設定開啟 profile, openid
+              liff.getProfile()
+                  .then((profile) => {
+                    console.log("取得使用者公開資料");
+                    console.log(profile);
+                    setProfile(profile);
+              });
+  
+            }
+        });
+      } catch (err) {
+        // 發生錯誤
+        console.log(err.code, err.message)
+        // alert(err.message)
+      }
+    };
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   const [keyValue, setKeyValue] = useState(0);
   const [value, setValue] = useState("b");
   const [qty, setQty] = useState(0);
@@ -142,23 +182,153 @@ export default function Tableaupage() {
   // console.log(option.width);
   // console.log(option.height);
 
-  const handleSubmit = event => {
 
-    if (item === "") {
-      alert("請選擇產品");
-      return;
-    }
-    if (qty === 0) {
-      alert("請選擇數量");
-      return;
-    }
-    alert("感謝您的訂單。");
-    // console.log(event.target.value);
-  };
 
   function logValue() {
     console.log(value);
   }
+
+  const address = `https://api.puff.tw/member_money/${profile.userId}`
+  // const address = `https://api.puff.tw/member_money/Ue563aff03e86cdf9fd457d38671edfe4`;
+  const fetcher = async (url) => await axios.get(url).then((res) => res.data);
+  const { data, error } = useSWR(address, fetcher);
+  console.log('data', data)
+  console.log('data', data?.money)
+
+  const order = {
+    item: item,
+    qty: qty,
+    price: 100,
+    total: qty*100,
+    money_before: data ? data.money : 0,
+    money_after: data? data.money - (qty*100) : 0
+  }
+
+
+  const headers = new Headers({
+    "Content-Type": "application/x-www-form-urlencoded"
+  });
+  
+  const urlencoded = new URLSearchParams({
+    "grant_type": "password",
+    "username": "test",
+    "password": "xyz1234",
+    "scope": "write",
+    "client_id": "test",
+    "client_secret": "test12",
+  });
+  
+  const opts = {
+    method: 'POST',
+    headers: headers,
+    body: urlencoded,
+  };
+
+  async function updateMoney(url, { arg }) {
+    await fetch(url, {
+      method: 'POST',
+      // headers: headers,
+      headers: {
+        'Accept': 'application/json'
+        // 'Content-Type': 'application/json'
+      },
+      body: arg,
+      // body: JSON.stringify(arg),
+    })
+    // await fetch(url, {
+    //   method: 'POST',
+    //   body: JSON.stringify(arg)
+    // })
+  }
+  
+
+  const address2 = `https://api.puff.tw/money/set`;
+  const { trigger, isMutating } = useSWRMutation(address2, updateMoney, /* options */)
+  const handleSubmit = async event => {
+    if (data === undefined) {
+      alert("請先登入");
+      setOpen(false);
+      return;
+    }
+    if (data?.money === undefined) {
+      alert("錢不夠");
+      setOpen(false);
+      return;
+    }
+    if (order.money_after <= 0 ) {
+      alert("錢不夠");
+      setOpen(false);
+      return;
+    }
+    if (item === "") {
+      alert("請選擇產品");
+      setOpen(false);
+      return;
+    }
+    if (qty === 0) {
+      alert("請選擇數量");
+      setOpen(false);
+      return;
+    }
+    // alert("感謝您的訂單。");
+    const uid = profile.userId;
+    const post = {
+      user_id: uid,
+      amount: order.money_after
+    };
+
+    const urlencoded = new URLSearchParams(post);
+    // const result = await trigger(urlencoded, /* options */)
+    // const result = await trigger(urlencoded, /* options */)
+    
+    const result = update_money(uid, order.money_after)
+    console.log('result', result);
+    // if (result.money === order.money_after){
+
+    // }
+
+
+    // const postData = async (post) => {
+    //   await axios.post(address2, post);
+    //   await mutate();
+    //   // //clear the form
+    //   // setForm({ ...form, comment: "" });
+    // };
+
+
+    // const { data2, error } = useSWR(address2, fetcher2, {
+    //   revalidateOnFocus: false,
+    // });
+
+    setOpen(false);
+    // console.log(event.target.value);
+  };
+
+
+  const update_money = async (user_id, amount) => {
+    const body = new FormData();
+    // const url = `https://api.puff.tw/money/set`;
+    const url = `https://api.puff.tw/money/set?user_id=${user_id}&amount=${amount}`;
+    // const field_name1 = "user_id";
+      // body.append(field_name1, "Ue563aff03e86cdf9fd457d38671edfe4");
+      // const field_name2 = "amount";
+      // body.append(field_name2, 100);
+    const response = await fetch(url, {
+      method: "POST",
+      // mode: 'no-cors',
+      // headers: {
+      //   'Accept': 'application/json',
+      //   'Content-Type': 'application/json'
+      // },
+      body: body
+    });
+    const json = await response.json();
+    return json;
+    // {
+    //   "class": "sweetpotato"
+    // }
+  };
+
 
   return (
     // <Layout onButtonClick={() => setKeyValue(keyValue + 1)} >
@@ -176,7 +346,7 @@ export default function Tableaupage() {
         height: '200px', fontSize: "20pt",
         display: "flex", flexDirection: "column",
         justifyContent: "space-evenly", maxWidth: "300px" }}>
-        <span> 農產品 </span>
+        <span> 你有 { data ? data.money : 0 } 金額</span>
         <select onChange={handleChange} name="item" id="fruit-select"
           style={{ fontSize: "20pt" }}
         >
@@ -229,15 +399,35 @@ export default function Tableaupage() {
         </select> */}
 
         {/* &nbsp;&nbsp;&nbsp;&nbsp; */}
-        <button
+        {/* <button
           onClick={ handleSubmit }
           style={{ fontSize: "20pt" }}
-        >下單</button>
+        >下單</button> */}
+        <ModalDialog modal={open} setModal={setOpen} order={order} handleSubmit={handleSubmit}/>
+      </div>
 
+
+      {/* <div
+        // className="w-full px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-full cursor-pointer"
+        onClick={() => setIsOpen(true)}
+      >
+        <h3 className="md:text-lg text-gray-500">
+        Whats on your mind, Harsh ?
+        </h3>
+      </div> */}
+
+      {/* <Modal open={isOpen} /> */}
+
+      <div className="flex flex-col h-screen justify-center items-center">
+      
+        {/* <Modal isOpen={isOpen} setIsOpen={setIsOpen} /> */}
+        {/* <ModalDialog isOpen={isOpen} setIsOpen={setIsOpen} /> */}
+        
+        {/* <button onClick={() => setIsOpen(true)}>下單</button> */}
       </div>
 
       <div className="" style={{ width: '100%'}}>
-          <iframe style={{ width: '100%', height: '1300px' }} src="/tableau/index.html#elements" ></iframe>
+          <iframe style={{ width: '100%', height: '1150px' }} src="/tableau/index.html#elements" ></iframe>
       </div>
     </section>
   );
