@@ -99,7 +99,9 @@ export default function Predict() {
         </div>
 
         <div>
-          <img src={createObjectURL} />
+          <img 
+          style={{ width: '400px', height: '400px' }}
+          src={createObjectURL} />
           <h4>請選擇圖片</h4>
           <input type="file" name="myImage" onChange={uploadToClient} />
         </div>

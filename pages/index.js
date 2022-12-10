@@ -262,9 +262,10 @@ export default function Home(props) {
             <h3>影像風格轉換 &rarr;</h3>
             <p>農作物的影像風格轉換</p>
           </Link>
-
+          
         </div>
-        <Link href="/tableau.html" className={styles.card}>
+        {/* <Link href="/tableau/index.html#elements" className={styles.card}> */}
+        <Link href="/tableaupage" className={styles.card}>
           <h3>Tableau 報表</h3>
           <p>相關數據分析</p>
           {/* <tableau-viz id="tableauViz"

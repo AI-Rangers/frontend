@@ -81,7 +81,9 @@ export default function Camera() {
     <section style={{ textAlign: 'center' }}>
       <div >
         <div>
-          <img src={createObjectURL} />
+          <img 
+          style={{ width: '400px', height: '400px' }}
+          src={createObjectURL} />
           <h4>請選擇圖片</h4>
           <input type="file" name="myImage" onChange={uploadToClient} />
         </div>
@@ -91,7 +93,9 @@ export default function Camera() {
           {/* {styledImage.file} */}
         </div>
         <div>
-          {hasStyledImage && <img src={`https://api.puff.tw/${styledImage.path}`} /> }
+          {hasStyledImage && <img 
+          style={{ width: '400px', height: '400px' }}
+          src={`https://api.puff.tw/${styledImage.path}`} /> }
         </div>
       </div>
     </section>
