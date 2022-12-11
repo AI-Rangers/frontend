@@ -396,15 +396,13 @@ export default function Home(props) {
 
           <Link href="/tableaupage" className={styles.card}>
             <Image
-              src="/images/tableau.webp"
+              src="/images/shoppingcart.png"
               width={50}
               height={50}
-              alt="tableau"
+              alt="shopping cart"
             />
-
-          
-            <h3>Tableau</h3>
-            <p>相關數據分析</p>
+            <h3>農產品購物</h3>
+            <p>兌換購物金</p>
             {/* <tableau-viz id="tableauViz"
               src='https://public.tableau.com/views/Superstore_24/Overview'
               // src='https://public.tableau.com/views/crop_16701370109140/Overview'
