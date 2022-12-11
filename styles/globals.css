@@ -160,3 +160,17 @@ a {
     flex-direction: column;
   }
 }
+
+/* ADD */
+
+html {
+  height: 100%;
+}
+
+/* body {
+  background-image: url('/assets/images/bg.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+} */

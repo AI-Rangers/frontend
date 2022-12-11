@@ -3,8 +3,6 @@ import styles from '../styles/Home.module.css';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from "react";
 import Image from 'next/image';
-import { Button, Card, CardBody, CardTitle, CardSubtitle, CardText, CardGroup,
-  Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 // export default function Home({ posts }) {
 export default function Home(props) {
@@ -213,211 +211,74 @@ export default function Home(props) {
 
   return (
     <>
-    <div className={styles.bg}>
     <div className={styles.container}>
       <Head>
         <title>Home</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* <header id="header">
-        <div class="logo">
-          <span class="icon fa-gem"></span>
-        </div>
-        <div class="content">
-          <div class="inner">
-            <h1>Dimension</h1>
-            <p>A fully responsive site template designed by <a href="https://html5up.net">HTML5 UP</a> and released<br />
-            for free under the <a href="https://html5up.net/license">Creative Commons</a> license.</p>
-          </div>
-        </div>
-        <nav>
-          <ul>
-            <li><a href="#intro">Intro</a></li>
-            <li><a href="#work">Work</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-
-            
-          </ul>
-        </nav>
-      </header> */}
-
-
-{/* <CardGroup>
-  <Card
-    style={{
-      width: '18rem'
-    }}
-  >
-    <img
-      alt="Sample"
-      src="https://picsum.photos/300/200"
-    />
-    <CardBody>
-      <CardTitle tag="h5">
-        影像辨識
-      </CardTitle>
-      <CardSubtitle
-        className="mb-2 text-muted"
-        tag="h6"
-      >
-        農作物的影像辨識
-      </CardSubtitle>
-      <CardText>
-      </CardText>
-      <Button>
-        Button
-      </Button>
-    </CardBody>
-  </Card>
-
-  <Card
-    style={{
-      width: '18rem'
-    }}
-  >
-    <img
-      alt="Sample"
-      src="https://picsum.photos/300/200"
-    />
-    <CardBody>
-      <CardTitle tag="h5">
-      影像辨識
-      </CardTitle>
-      <CardSubtitle
-        className="mb-2 text-muted"
-        tag="h6"
-      >
-        農作物的影像辨識
-      </CardSubtitle>
-      <CardText>
-      </CardText>
-      <Button>
-        Button
-      </Button>
-    </CardBody>
-  </Card>
-
-  <Card
-    style={{
-      width: '18rem'
-    }}
-  >
-    <img
-      alt="Sample"
-      src="https://picsum.photos/300/200"
-    />
-    <CardBody>
-      <CardTitle tag="h5">
-      Tableau 報表
-      </CardTitle>
-      <CardSubtitle
-        className="mb-2 text-muted"
-        tag="h6"
-      >
-        相關數據分析
-      </CardSubtitle>
-      <CardText>
-      </CardText>
-      <Button>
-        Button
-      </Button>
-    </CardBody>
-  </Card>
-</CardGroup> */}
-
-
-
       <main className={styles.main}>
-
-          {islogin ? (
-            <Link href="/" onClick={(e) => handleLineLogout(e, "/logout")} className={styles.card}>
-            {/* <h3>LINE登出 &rarr;</h3>
-            <p>立即註冊</p> */}
-            <Image
-              src="/images/line_on.png"
-              width={50}
-              height={50}
-              alt="LINE Frontend Framework"
-            />
-            </Link>
-          ) : (
-            <Link href="/" onClick={(e) => handleLineLogin(e, "/login")} className={styles.card}>
-            {/* <h3>LINE登入 &rarr;</h3>
-            <p>立即註冊</p> */}
-            <Image
-              src="/images/line_off.png"
-              width={50}
-              height={50}
-              alt="LINE Frontend Framework"
-            />
-            </Link>
-          )}
-
         <h1 className={styles.title}>
-          食農教育
+          <a href="/">食農教育</a>
         </h1>
 
         <p className={styles.description}>
            透過體驗，培養相關知識。
         </p>
-        <hr style={{
-          width: "100%",
-          borderColor: "white",
-          borderWidth: "5px"
-        }}/>
 
+        {/* <Image
+          src="/images/LINE_logo.webp"
+          width={200}
+          height={200}
+          alt="LINE Frontend Framework"
+        /> */}
 
         <div className={styles.grid}>
+          {islogin ? (
+            <Link href="/" onClick={(e) => handleLineLogout(e, "/logout")} className={styles.card}>
+            <h3>LINE登出 &rarr;</h3>
+            <p>立即註冊</p>
+            </Link>
+          ) : (
+            <Link href="/" onClick={(e) => handleLineLogin(e, "/login")} className={styles.card}>
+            <h3>LINE登入 &rarr;</h3>
+            <p>立即註冊</p>
+            </Link>
+          )}
+      
           {/* onClick={(e) => handleGetProfile(e, "/profile")} */}
-          {/* <Link href="/profile"  className={styles.card}>
+          <Link href="/profile"  className={styles.card}>
             <h3>用戶資訊 &rarr;</h3>
             <p>顯示相關資訊</p>
-          </Link> */}
+          </Link>
 
           {/* <Link href="/" onClick={(e) => handleCamera(e, "/camera")} className={styles.card}> */}
           <Link href="/predict" className={styles.card}>
-            <Image
-              src="/images/picture.png"
-              width={50}
-              height={50}
-              alt="picture"
-            />
-            <h3>影像辨識</h3>
-            <p>相關農作物</p>
+            <h3>影像辨識 &rarr;</h3>
+            <p>農作物的影像辨識</p>
           </Link>
 
           {/* <Link href="/style" onClick={(e) => handleStyle(e, "/style")} className={styles.card}> */}
-          {/* <Link href="/style" className={styles.card}>
+          <Link href="/style" className={styles.card}>
             <h3>影像風格轉換 &rarr;</h3>
             <p>農作物的影像風格轉換</p>
-          </Link> */}
-
-          <Link href="/tableaupage" className={styles.card}>
-            <Image
-              src="/images/tableau.webp"
-              width={50}
-              height={50}
-              alt="tableau"
-            />
-
-          
-            <h3>Tableau</h3>
-            <p>相關數據分析</p>
-            {/* <tableau-viz id="tableauViz"
-              src='https://public.tableau.com/views/Superstore_24/Overview'
-              // src='https://public.tableau.com/views/crop_16701370109140/Overview'
-              device="desktop" toolbar="bottom" hide-tabs width="800" height="600">
-            </tableau-viz> */}
-            {/* <TableauPlaceholder /> */}
           </Link>
-
+          
         </div>
         {/* <Link href="/tableau/index.html#elements" className={styles.card}> */}
+        <Link href="/tableaupage" className={styles.card}>
+          <h3>Tableau 報表</h3>
+          <p>相關數據分析</p>
+          {/* <tableau-viz id="tableauViz"
+            src='https://public.tableau.com/views/Superstore_24/Overview'
+            // src='https://public.tableau.com/views/crop_16701370109140/Overview'
+            device="desktop" toolbar="bottom" hide-tabs width="800" height="600">
+          </tableau-viz> */}
+          {/* <TableauPlaceholder /> */}
+        </Link>
       </main>
 
-      {/* <footer className={styles.footer}>
+      <footer className={styles.footer}>
         <a
           href="/"
           target="_blank"
@@ -426,9 +287,7 @@ export default function Home(props) {
           Powered by{' '}
           <img src="/plant.png" alt="Logo" className={styles.logo} />
         </a>
-      </footer> */}
-
-    </div>
+      </footer>
     </div>
   {/* <script src="/script.js" strategy="afterInteractive" /> */}
   </>)

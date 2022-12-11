@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
+import styles from '../styles/Home.module.css';
+import { Button, Card, CardBody, CardTitle, CardSubtitle, CardText, CardGroup,
+  Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 export default function Predict() {
   // useEffect(async () => {
@@ -86,27 +89,74 @@ export default function Predict() {
   // };
 
   return (
-    <section style={{ textAlign: 'center' }}>
-      <div >
-        <div>
-          <h4>影像辨識</h4>
-          {/* {styledImage.file} */}
-        </div>
+    <div className={styles.bg}>
+    <div className={styles.container}>
+      <h1 className={styles.title}>
+        影像辨識
+      </h1>
+      <hr style={{
+        width: "100%",
+        borderColor: "white",
+        borderWidth: "5px"
+      }}/>
+  <Card
+    style={{
+      width: '28rem'
+    }}
+  >
+    <img style={{ width: '100%', height: '400px' }} src={createObjectURL} />
+    <CardBody style={{ textAlign: 'center' }}>
         <div>
           <h2> 辨識結果為 : </h2>
           <h2 style={{ color: 'red' }}> { hasPredict && predict[0].class } </h2>
           <h2 style={{ color: 'red' }}> { hasPredict && predict[0].confidence } </h2>
         </div>
-
+      {/* <CardTitle tag="h5">
+        影像辨識
+      </CardTitle>
+      <CardSubtitle
+        className="mb-2 text-muted"
+        tag="h6"
+      >
+        農作物的影像辨識
+      </CardSubtitle>
+      <CardText>
+      </CardText> */}
         <div>
+          <h4>請選擇圖片</h4>
+          <input type="file" name="myImage" onChange={uploadToClient} />
+        </div>
+      {/* <Button>
+        Button
+      </Button> */}
+    </CardBody>
+  </Card>
+
+
+
+
+    <section style={{ textAlign: 'center' }}>
+      <div >
+        {/* <div>
+          <h4>影像辨識</h4>
+        </div>
+        <div>
+          <h2> 辨識結果為 : </h2>
+          <h2 style={{ color: 'red' }}> { hasPredict && predict[0].class } </h2>
+          <h2 style={{ color: 'red' }}> { hasPredict && predict[0].confidence } </h2>
+        </div> */}
+
+        {/* <div>
           <img 
           style={{ width: '400px', height: '400px' }}
           src={createObjectURL} />
           <h4>請選擇圖片</h4>
           <input type="file" name="myImage" onChange={uploadToClient} />
-        </div>
+        </div> */}
       </div>
     </section>
+    </div>
+    </div>
   );
   
 }
