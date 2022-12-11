@@ -65,8 +65,8 @@ export default function Home(props) {
           // 開啟連結
           await liff.login({
             // 使用者登入後要去到哪個頁面
-            // redirectUri: 'https://liff.puff.tw/callback'
-            redirectUri: 'https://9a35-118-150-160-200.jp.ngrok.io/callback'
+            redirectUri: 'https://liff.puff.tw/callback'
+            // redirectUri: 'https://9a35-118-150-160-200.jp.ngrok.io/callback'
           // }).then( async (res) => {
           //     isLoggedIn = await liff.isLoggedIn();
           //     console.log("取得登入資料", res);
