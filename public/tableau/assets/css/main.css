@@ -1663,3 +1663,7 @@ input, select, textarea {
 #main article {
 	padding: 1.5rem 0.5rem 1.5rem 0.5rem;
 }
+
+#main article.active {
+	padding-bottom: 22rem;
+}
