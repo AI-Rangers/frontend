@@ -418,13 +418,11 @@ export default function Tableaupage(props) {
 
       {/* <Modal open={isOpen} /> */}
 
-      <div className="flex flex-col h-screen justify-center items-center">
-      
-        {/* <Modal isOpen={isOpen} setIsOpen={setIsOpen} /> */}
-        {/* <ModalDialog isOpen={isOpen} setIsOpen={setIsOpen} /> */}
-        
-        {/* <button onClick={() => setIsOpen(true)}>下單</button> */}
-      </div>
+      {/* <div className="flex flex-col h-screen justify-center items-center">
+        <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
+        <ModalDialog isOpen={isOpen} setIsOpen={setIsOpen} />
+        <button onClick={() => setIsOpen(true)}>下單</button>
+      </div> */}
 
       <div className="" style={{ width: '100%'}}>
           <iframe style={{ width: '100%', height: '1150px' }} src="/tableau/index.html#elements" ></iframe>
